@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyConnection1",
+            "request": "launch",
+            "mainClass": "MyConnection1",
+            "projectName": "java-windowBuilder"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyConnection2",
+            "request": "launch",
+            "mainClass": "MyConnection2"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Test",
+            "request": "launch",
+            "mainClass": "Test"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - InetAdress",
+            "request": "launch",
+            "mainClass": "InetAdress"
+        }
+    ]
+}
