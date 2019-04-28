@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ServerSocketTest",
+            "request": "launch",
+            "mainClass": "ServerSocketTest",
+            "projectName": "java-windowBuilder"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - MyConnection1",
             "request": "launch",
             "mainClass": "MyConnection1",

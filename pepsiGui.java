@@ -1,6 +1,13 @@
-package one;
+
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,7 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 
-public class swingOne {
+
+
+public class pepsiGui {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -18,6 +27,10 @@ public class swingOne {
 	private JTextField textField_2;
 	private JButton btnNewButton_1;
 	private JLabel lblNewLabel_3;
+    String iadress;
+    String textSay;
+    int port;
+    Socket s;
 
 	/**
 	 * Launch the application.
@@ -26,7 +39,7 @@ public class swingOne {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					swingOne window = new swingOne();
+					pepsiGui window = new pepsiGui();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +51,7 @@ public class swingOne {
 	/**
 	 * Create the application.
 	 */
-	public swingOne() {
+	public pepsiGui() {
 		initialize();
 	}
 
@@ -72,6 +85,21 @@ public class swingOne {
 		JButton btnNewButton = new JButton("连接服务器");
 		btnNewButton.setBounds(408, 17, 107, 27);
 		frame.getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			iadress = textField.getText();
+            port = Integer.parseInt(textField_1.getText());
+            try {
+                s = new Socket(iadress, port); 
+            } catch (Exception exception) {
+                //TODO: handle exception
+            }
+            
+			System.out.println(iadress + port);
+		}
+		});
+
 		
 		lblNewLabel_2 = new JLabel("待发送消息:");
 		lblNewLabel_2.setBounds(12, 85, 88, 17);
@@ -84,7 +112,31 @@ public class swingOne {
 		
 		btnNewButton_1 = new JButton("发   言");
 		btnNewButton_1.setBounds(408, 80, 107, 27);
-		frame.getContentPane().add(btnNewButton_1);
+        frame.getContentPane().add(btnNewButton_1);
+        btnNewButton_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textSay = textField_2.getText();
+                System.out.println("yyyy");
+                try {
+                    System.out.println(s);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));    //输入流
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                    System.out.println(textSay);
+                    bw.write(textSay + "\r\n");
+                    bw.flush();
+                    System.out.println("已发出。。");
+                    String strbr = br.readLine();
+                    System.out.println(strbr);
+                    // textPane.;
+                } catch (Exception exception) {
+                    //TODO: handle exception
+                }
+                
+                System.out.println(iadress + port);
+            }
+            });
+    
 		
 		lblNewLabel_3 = new JLabel("服务器 Echo 消息面板");
 		lblNewLabel_3.setBounds(12, 152, 151, 17);
@@ -94,4 +146,10 @@ public class swingOne {
 		textPane.setBounds(12, 181, 509, 263);
 		frame.getContentPane().add(textPane);
 	}
+
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//	}
+
 }

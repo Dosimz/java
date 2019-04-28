@@ -1,6 +1,8 @@
 package pepsi;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,6 +10,8 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+
+import pepsi.UserCntion;
 
 public class pepsiGui {
 
@@ -18,6 +22,8 @@ public class pepsiGui {
 	private JTextField textField_2;
 	private JButton btnNewButton_1;
 	private JLabel lblNewLabel_3;
+	String iadress;
+	int port;
 
 	/**
 	 * Launch the application.
@@ -72,6 +78,15 @@ public class pepsiGui {
 		JButton btnNewButton = new JButton("连接服务器");
 		btnNewButton.setBounds(408, 17, 107, 27);
 		frame.getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			iadress = textField.getText();
+			port = Integer.parseInt(textField_1.getText());
+			System.out.println(iadress + port);
+		}
+		});
+
 		
 		lblNewLabel_2 = new JLabel("待发送消息:");
 		lblNewLabel_2.setBounds(12, 85, 88, 17);
@@ -94,4 +109,10 @@ public class pepsiGui {
 		textPane.setBounds(12, 181, 509, 263);
 		frame.getContentPane().add(textPane);
 	}
+
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//	}
+
 }
